@@ -9,17 +9,22 @@ class TasawkServiceProvider extends ServiceProvider {
 
     protected $Namespace = 'App\Components';
     protected $API_version = 'api/v1/';
-    protected $saloka = '';
     protected $Middlewares = [
         'web',
-        'localize' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
-        'localizationRedirect' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
-        'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
-        'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class
+        // 'localize' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
+        // 'localizationRedirect' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
+        // 'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
+        // 'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class
+    ];
+
+    protected $commands = [
+        'Tasawk\TasawkComponent\Console\Commands\FComponent',
+        'Tasawk\TasawkComponent\Console\Commands\MComponent',
+        'Tasawk\TasawkComponent\Console\Commands\VComponent',
     ];
 
     public function register() {
-        // 
+        $this->commands($this->commands);
     }
 
     public function boot() {
@@ -30,6 +35,8 @@ class TasawkServiceProvider extends ServiceProvider {
         $this->parseViewConfig();
         $this->loadWebRoutesDashboard();
         $this->loadWebRoutesFrontEnd();
+
+        include __DIR__ . '/Common/Route/Dashboard.php';
         $this->mergeConfig();
         $this->webArtisan();
         if (request()->is('dashboard*')) {
@@ -75,14 +82,13 @@ class TasawkServiceProvider extends ServiceProvider {
             return;
         }
         Route::middleware($this->Middlewares)
-                ->prefix(\LaravelLocalization::setLocale())
-                ->namespace($this->Namespace)
+                // ->prefix(\LaravelLocalization::setLocale())
                 ->group(
                         function () {
                     Route::prefix('login')->group(
                             function () {
-                        Route::get('/', 'Common\Controller\Front\AuthController@login')->name('login');
-                        Route::post('/', 'Common\Controller\Front\AuthController@loginAuth')->name('loginCheck');
+                        Route::get('/', 'Tasawk\TasawkComponent\Common\Controller\Front\AuthController@login')->name('login');
+                        Route::post('/', 'Tasawk\TasawkComponent\Common\Controller\Front\AuthController@loginAuth')->name('loginCheck');
                     }
                     );
                 }
@@ -95,9 +101,8 @@ class TasawkServiceProvider extends ServiceProvider {
         }
         $this->authFrontRoute();
         $r = \Route::middleware($this->Middlewares)
-                ->prefix(\LaravelLocalization::setLocale())
+                // ->prefix(\LaravelLocalization::setLocale())
                 ->namespace($this->Namespace);
-        $r->group(app_path() . '/Components/Common/Route/Front.php');
         foreach (glob(app_path() . '/Components/**/Route/Front.php') as $file) {
             $r->group($file);
         }
@@ -139,7 +144,7 @@ class TasawkServiceProvider extends ServiceProvider {
             return;
         }
         $this->authRoute();
-        $dashboard = \Route::middleware(['web', 'auth', 'is.admin'])
+        $dashboard = \Route::middleware(['web', 'auth'])
                 ->prefix('dashboard')
                 ->name('dashboard.')
                 ->namespace($this->Namespace);

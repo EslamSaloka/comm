@@ -70,14 +70,16 @@ if (!function_exists('DashBoardReports')) {
         foreach (DashBoardReportsType() as $value) {
             $data[$value] = [];
         }
-        foreach ($f->get('report') as $val) {
-            if (is_array($val['type'])) {
-                foreach (DashBoardReportsType() as $value) {
-                    $data[$value][] = $val;
-                }
-            } else {
-                if (array_key_exists($val['type'], $data)) {
-                    $data[$val['type']][] = $val;
+        if(!is_null($f->get('report'))) {
+            foreach ($f->get('report') as $val) {
+                if (is_array($val['type'])) {
+                    foreach (DashBoardReportsType() as $value) {
+                        $data[$value][] = $val;
+                    }
+                } else {
+                    if (array_key_exists($val['type'], $data)) {
+                        $data[$val['type']][] = $val;
+                    }
                 }
             }
         }
