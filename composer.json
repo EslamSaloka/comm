@@ -1,0 +1,27 @@
+{
+    "name": "tasawk/component",
+    "description": "component Method",
+    "keywords":["Laravel","TasawkComponent"],
+    "license": "MIT",
+    "version":"1.0",
+    "authors": [
+        {
+            "name": "Eslam Saloka",
+            "email": "eslammohsenhandousa@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tasawk\\TasawkComponent\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tasawk\\TasawkComponent\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
