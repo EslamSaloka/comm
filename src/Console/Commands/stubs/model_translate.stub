@@ -1,0 +1,21 @@
+<?php
+
+namespace {{namespace}};
+
+use Illuminate\Database\Eloquent\Model;
+
+class {{model_name}} extends Model {
+
+    use \Dimsav\Translatable\Translatable;
+
+    protected $translationForeignKey = "{{model_name_small}}_id";
+
+    public $translatedAttributes = [];
+
+    public $translationModel = '{{namespace}}\Translation\{{model_name}}';
+
+    protected $table = "{{model_name_small}}";
+
+    protected $fillable = [];
+
+}

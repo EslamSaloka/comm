@@ -1,0 +1,12 @@
+<?php
+
+namespace {{namespace}};
+
+use Illuminate\Database\Eloquent\Model;
+
+class {{model_name}} extends Model {
+    
+    protected $table = "{{model_name_small}}";
+
+    protected $fillable = [];
+}

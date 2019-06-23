@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Components\Common\Controller\Dashboard;
+namespace Tasawk\TasawkComponent\Common\Controller\Dashboard;
 
-use App\Components\Controller;
+use Tasawk\TasawkComponent\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class Logout extends Controller {

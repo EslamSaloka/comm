@@ -1,0 +1,17 @@
+<?php
+
+namespace {{namespace}};
+
+use Illuminate\Database\Eloquent\Model;
+
+class {{model_name}} extends Model {
+
+    protected $table = "{{model_name_small}}_translations";
+
+    protected $fillable = [];
+    
+    protected $guarded = ['{{model_name_small}}_id'];
+    
+    public $timestamps = false;
+
+}

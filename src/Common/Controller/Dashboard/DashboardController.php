@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Components\Common\Controller\Dashboard;
+namespace Tasawk\TasawkComponent\Common\Controller\Dashboard;
 
 use Illuminate\Http\Request;
-use App\Components\Controller;
+use Tasawk\TasawkComponent\Controller;
 
 class DashboardController extends Controller {
 

@@ -1,0 +1,13 @@
+<?php
+
+return [
+    'title' => '{{name}}',
+    'icon' => 'icon-users',
+    // sub items
+    'items' => [
+        [
+            'title' => 'All {{name}}',
+            'url' => 'dashboard.{{Nname}}.index',
+        ],
+    ]
+];

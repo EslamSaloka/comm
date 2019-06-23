@@ -1,0 +1,50 @@
+@extends('DCommon::master')
+@section('content')
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">Basic form inputs<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li><a data-action="collapse" class=""></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-lg">
+                <thead>
+                    <tr>
+                        <th data-toggle="true">@lang('Name')</th>
+                        <th class="text-center" style="width: 150px;"><?php echo __('Actions') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($lists as $list)
+                    <tr>
+                        <td>{{$list->name}}</td>
+                        
+                        <td>
+                            <ul class="icons-list">
+                                <li>
+                                    <a href="{{ route('dashboard.{{name}}.edit',$list->id) }}"><i class="icon-pencil"></i></a>
+                                </li>
+                                <li>
+                                    {!! delete_list_from_table('dashboard.{{name}}.destroy',$list->id) !!}
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="5"><?php echo __('No results') ?></td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center m-20">
+            {{ $lists->appends(request()->input())->links() }}
+        </div>
+    </div>
+</div>
+@endsection
