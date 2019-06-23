@@ -4,7 +4,6 @@ namespace Tasawk\TasawkComponent;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
-use Tasawk\TasawkComponent\Shared\View\FileViewFinder;
 
 class TasawkServiceProvider extends ServiceProvider {
 
@@ -20,13 +19,7 @@ class TasawkServiceProvider extends ServiceProvider {
     ];
 
     public function register() {
-        $this->themeFinder();
-    }
-
-    public function themeFinder() {
-        $this->app->singleton('theme.finder', function($app) {
-            return new FileViewFinder($app['files'], []);
-        });
+        // 
     }
 
     public function boot() {
@@ -40,9 +33,9 @@ class TasawkServiceProvider extends ServiceProvider {
         $this->mergeConfig();
         $this->webArtisan();
         if (request()->is('dashboard*')) {
-            view()->addNamespace('DCommon', _fixDirSeparator(app_path() . '/Components/Common/View/Dashboard'));
+            view()->addNamespace('DCommon', _fixDirSeparator(__DIR__ . '/Common/View/Dashboard'));
         } else {
-            view()->addNamespace('FCommon', _fixDirSeparator(app_path() . '/Components/Common/View/Front'));
+            view()->addNamespace('FCommon', _fixDirSeparator(__DIR__ . '/Common/View/Front'));
         }
     }
 
