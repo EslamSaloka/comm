@@ -4,6 +4,7 @@ namespace Tasawk\TasawkComponent;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Tasawk\TasawkComponent\Shared\View\FileViewFinder;
 
 class TasawkServiceProvider extends ServiceProvider {
 
@@ -19,7 +20,13 @@ class TasawkServiceProvider extends ServiceProvider {
     ];
 
     public function register() {
-        
+        $this->themeFinder();
+    }
+
+    public function themeFinder() {
+        $this->app->singleton('theme.finder', function($app) {
+            return new FileViewFinder($app['files'], []);
+        });
     }
 
     public function boot() {
@@ -33,9 +40,9 @@ class TasawkServiceProvider extends ServiceProvider {
         $this->mergeConfig();
         $this->webArtisan();
         if (request()->is('dashboard*')) {
-            view()->addNamespace('DCommon', _fixDirSeparator(__DIR__ . '/Common/View/Dashboard'));
+            view()->addNamespace('DCommon', _fixDirSeparator(app_path() . '/Components/Common/View/Dashboard'));
         } else {
-            view()->addNamespace('FCommon', _fixDirSeparator(__DIR__ . '/Common/View/Front'));
+            view()->addNamespace('FCommon', _fixDirSeparator(app_path() . '/Components/Common/View/Front'));
         }
     }
 
@@ -59,30 +66,17 @@ class TasawkServiceProvider extends ServiceProvider {
                 die('<pre>' . $exc->getMessage() . '</pre>');
             }
             die("\n<br>END\n<br>");
-            $oldKey = file_get_contents(__DIR__ . '/artisan_key');
-            if (trim($key) == $oldKey) {
-                try {
-                    Artisan::call($command);
-                    $newKey = str_random(60);
-                    file_put_contents(__DIR__ . '/artisan_key', $newKey);
-                    return "<pre>Done <br/>New key: $newKey</pre>";
-                } catch (\Symfony\Component\Console\Exception\CommandNotFoundException $exc) {
-                    die('<pre>' . $exc->getMessage() . '</pre>');
-                }
-            }
-            return 'Ha Ha Ha!!!';
         }
         );
     }
 
     private function webArtisanMigration() {
-        foreach (glob(__DIR__ . '/**/Migration/*.php') as $file) {
+        foreach (glob(app_path() . '/Components/**/Migration/*.php') as $file) {
             $file = _fixDirSeparator($file);
             $this->loadMigrationsFrom($file);
         }
     }
 
-    // Front
     public function authFrontRoute() {
         if (request()->is('dashboard*') || request()->is('api*')) {
             return;
@@ -117,7 +111,6 @@ class TasawkServiceProvider extends ServiceProvider {
         return $r;
     }
 
-    // Api
     public function loadApiRoute() {
         if (!request()->is('api*')) {
             return;
@@ -131,7 +124,6 @@ class TasawkServiceProvider extends ServiceProvider {
         return $api;
     }
 
-    // Dashboard
     public function authRoute() {
         if (!request()->is('dashboard*')) {
             return;
