@@ -97,8 +97,8 @@ class TasawkServiceProvider extends ServiceProvider {
         $r = \Route::middleware($this->Middlewares)
                 ->prefix(\LaravelLocalization::setLocale())
                 ->namespace($this->Namespace);
-        $r->group(__DIR__ . '/Common/Route/Front.php');
-        foreach (glob(__DIR__ . '/**/Route/Front.php') as $file) {
+        $r->group(app_path() . '/Components/Common/Route/Front.php');
+        foreach (glob(app_path() . '/Components/**/Route/Front.php') as $file) {
             $r->group($file);
         }
         return $r;
@@ -111,7 +111,7 @@ class TasawkServiceProvider extends ServiceProvider {
         $api = \Route::middleware(['api'])
                 ->prefix($this->API_version)
                 ->namespace($this->Namespace);
-        foreach (glob(__DIR__ . '/**/Route/Api.php') as $file) {
+        foreach (glob(app_path() . '/Components/**/Route/Api.php') as $file) {
             $api->group($file);
         }
         return $api;
@@ -123,11 +123,11 @@ class TasawkServiceProvider extends ServiceProvider {
         }
         Route::middleware('web')->prefix('dashboard')->group(
                 function () {
-            Route::get('/logout', 'App\Components\Common\Controller\Dashboard\AuthController@Logout')->name('Dlogout');
+            Route::get('/logout', 'Tasawk\TasawkComponent\Common\Controller\Dashboard\AuthController@Logout')->name('Dlogout');
             Route::prefix('login')->group(
                     function () {
-                Route::get('/', 'App\Components\Common\Controller\Dashboard\AuthController@login')->name('login');
-                Route::post('/', 'App\Components\Common\Controller\Dashboard\AuthController@loginAuth')->name('loginCheck');
+                Route::get('/', 'Tasawk\TasawkComponent\Common\Controller\Dashboard\AuthController@login')->name('login');
+                Route::post('/', 'Tasawk\TasawkComponent\Common\Controller\Dashboard\AuthController@loginAuth')->name('loginCheck');
             }
             );
         }
@@ -143,7 +143,7 @@ class TasawkServiceProvider extends ServiceProvider {
                 ->prefix('dashboard')
                 ->name('dashboard.')
                 ->namespace($this->Namespace);
-        foreach (glob(__DIR__ . '/**/Route/Dashboard.php') as $file) {
+        foreach (glob(app_path() . '/Components/**/Route/Dashboard.php') as $file) {
             $dashboard->group($file);
         }
         return $dashboard;

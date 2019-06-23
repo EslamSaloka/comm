@@ -10,7 +10,7 @@ class AuthController extends Controller {
 
     public function login() {
         if (is_null(Auth::user())) {
-            return view('Common::login', get_defined_vars());
+            return view('DCommon::login', get_defined_vars());
         } else {
             return redirect()->route('dashboard.Dindex');
         }
