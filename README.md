@@ -9,6 +9,7 @@ composer require tasawk/component:dev-master
   providers = [
     Tasawk\TasawkComponent\TasawkServiceProvider::class,
   ];
+php artisan vendor:publish --tag=public_assets --force
 ``````````````
 # Used
 ```````````````
