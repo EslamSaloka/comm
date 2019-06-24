@@ -11,10 +11,10 @@ class TasawkServiceProvider extends ServiceProvider {
     protected $API_version = 'api/v1/';
     protected $Middlewares = [
         'web',
-        // 'localize' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
-        // 'localizationRedirect' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
-        // 'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
-        // 'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class
+        'localize' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
+        'localizationRedirect' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
+        'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
+        'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class
     ];
 
     protected $commands = [
@@ -82,7 +82,7 @@ class TasawkServiceProvider extends ServiceProvider {
             return;
         }
         Route::middleware($this->Middlewares)
-                // ->prefix(\LaravelLocalization::setLocale())
+                ->prefix(\LaravelLocalization::setLocale())
                 ->group(
                         function () {
                     Route::prefix('login')->group(
@@ -101,7 +101,7 @@ class TasawkServiceProvider extends ServiceProvider {
         }
         $this->authFrontRoute();
         $r = \Route::middleware($this->Middlewares)
-                // ->prefix(\LaravelLocalization::setLocale())
+                ->prefix(\LaravelLocalization::setLocale())
                 ->namespace($this->Namespace);
         foreach (glob(app_path() . '/Components/**/Route/Front.php') as $file) {
             $r->group($file);
