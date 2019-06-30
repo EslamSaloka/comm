@@ -3,6 +3,7 @@
 # Install
 ``````````````
 first clone tasawk project
+https://github.com/EslamSaloka/tasawk_project.git
 composer dump-autoload
 composer require tasawk/component:dev-master
 >>config>>app.php
