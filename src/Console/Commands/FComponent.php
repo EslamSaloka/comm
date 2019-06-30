@@ -125,8 +125,6 @@ class FComponent extends Command
             $check_name = true;
         }
 
-        $this->createOptions();
-
         if($check_name == true) {
             $ask = $this->ask('This Component Name Is Found Do Yo Want Replace This ? [Y | N]');    
             if(lcfirst($ask) == 'y') {
@@ -139,24 +137,6 @@ class FComponent extends Command
             $this->exportComponent($map);
         }
 
-    }
-
-    protected function createOptions() {
-        if(!file_exists(app_path('Components').'provider.php')) {
-            $path = app_path('Components');
-            file_put_contents(
-                $path.'/Provider.php',
-                $this->compileStub('Provider')
-            ); 
-            file_put_contents(
-                $path.'/helpers.php',
-                $this->compileStub('helpers')
-            ); 
-            file_put_contents(
-                $path.'/controller.php',
-                $this->compileStub('controller')
-            );
-        }
     }
 
     protected function compileStub($type='') {

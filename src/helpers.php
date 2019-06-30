@@ -93,7 +93,7 @@ if (!function_exists('AdminMenu')) {
     function AdminMenu() {
         $dashboardMenus = '';
 
-        $glob = glob(__DIR__ . '/**/Resources/menu/*.php');
+        $glob = glob(app_path('/Components') . '/**/Resources/menu/*.php');
         $f = collect($glob)->groupBy(
                 function ($el) {
             return pathinfo($el)['filename'];

@@ -7,7 +7,7 @@ return [
     'items' => [
         [
             'title' => 'All {{name}}',
-            'url' => 'dashboard.{{Nname}}.index',
+            'url' => '{{Nname}}.index',
         ],
     ]
 ];

@@ -3,18 +3,18 @@
 namespace {{namespace}};
 
 use Illuminate\Http\Request;
-use App\Components\Controller;
+use Tasawk\TasawkComponent\Controller;
 use {{model}}\Model\{{route}};
 
 class {{controlar_name}}Controller extends Controller
 {   
     public function index() {
         $lists = {{route}}::paginate();
-        return view('this::{{view_name}}.index',get_defined_vars());
+        return view('this::index',get_defined_vars());
     }
     
     public function create() {
-        return view('this::{{view_name}}.create',get_defined_vars());
+        return view('this::create',get_defined_vars());
     }
     
     public function store(request $request) {
@@ -23,11 +23,11 @@ class {{controlar_name}}Controller extends Controller
     }
     
     public function show({{route}} ${{lcfirst}}) {
-        return view('this::{{view_name}}.show',get_defined_vars());
+        return view('this::show',get_defined_vars());
     }
     
     public function edit(request $request,{{route}} ${{lcfirst}}) {
-        return view('this::{{view_name}}.edit',get_defined_vars());
+        return view('this::edit',get_defined_vars());
     }
     
     public function update(request $request,{{route}} ${{lcfirst}}) {
