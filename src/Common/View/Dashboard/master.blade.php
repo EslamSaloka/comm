@@ -120,7 +120,7 @@
                         <div class="footer text-muted">
                             &copy; {{ date('Y') }}.
                             <a href="#">
-                                @lang('Afnan')
+                                @lang('Project')
                             </a> by
                             <a href="https://tasawk.com.sa" target="_blank">
                                 @lang('Tasawk')
