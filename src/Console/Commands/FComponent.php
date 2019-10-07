@@ -328,7 +328,7 @@ class FComponent extends Command
        return str_replace(
            ['{{namespace}}','{{controlar_name}}','{{view}}','{{route}}','{{model}}','{{lcfirst}}','{{view_name}}'],
            [$directory,$controlar_name,$view,$this->argument('name'),$model,$lcfirst,$view_name],
-           file_get_contents(__DIR__.'/stubs/Controller.stub')
+           file_get_contents(__DIR__.'/stubs/controller.stub')
        );
    }
    

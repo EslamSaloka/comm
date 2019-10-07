@@ -8,7 +8,7 @@ use Validator;
 class Controller extends BaseController {
     /**
      *
-     * @var \App\Components\Common\Support\API 
+     * @var Tasawk\TasawkComponent\Common\Support\API 
      */
     protected $API = '';
 
