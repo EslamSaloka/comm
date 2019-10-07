@@ -2,54 +2,141 @@
 
 namespace Tasawk\TasawkComponent\Common\Support;
 
+use App\Exceptions\Errors\Http as HttpErrors;
+
 class API {
 
-    static function ApiValidation($Request = [], $rules = [], $except = [], $messages = []) {
-        $errors = [];
-        $validator = \Validator::make($Request, $rules, $messages);
-        if ($validator->fails()) {
-            foreach ($validator->errors()->toArray() as $k => $v) {
-                if (in_array($k, $except)) {
-                    continue;
-                }
-                $errors[] = [
-                    'key' => $k,
-                    'value' => __($v[0])
+    private $message;
+    private $data;
+    private $errors;
+    private $status;
+    private $attributes;
+    private $formatErrors = false;
+    static private $instance = null;
+
+    /**
+     * 
+     * @return App\Components\App\Common\Support\API;
+     */
+    static function newInstance() {
+        if (static::$instance === null) {
+            static::$instance = new API();
+        }
+        return static::$instance;
+    }
+
+    function addAttribute(string $attribute, $data) {
+        $this->attributes[$attribute] = $data;
+        return $this;
+    }
+
+    function getAttributes() {
+        return $this->attributes ?? [];
+    }
+
+    function setStatusErrorConditional() {
+        if (!is_array($this->errors)) {
+            throw new \Exception("Errors array is empty, set it at first.");
+        }
+        if (count($this->errors)) {
+            $this->setStatusError();
+        } else {
+            $this->setStatusOK();
+        }
+        return $this;
+    }
+
+    function setStatus(int $status) {
+        $this->status = $status;
+        return $this;
+    }
+
+    function setStatusOK() {
+        $this->setStatus(HttpErrors::OK);
+        return $this;
+    }
+
+    function setStatusError() {
+        $this->setStatus(HttpErrors::BadRequest);
+        return $this;
+    }
+
+    function getStatus() {
+        return $this->status;
+    }
+
+    function setMessage(string $message) {
+        $this->message = $message;
+        return $this;
+    }
+
+    function getMessage() {
+        return $this->message ?? '';
+    }
+
+    function setData($data) {
+        $this->data = $data;
+        return $this;
+    }
+
+    function getData() {
+        return $this->data ?? [];
+    }
+
+    function setErrors(array $errors) {
+        $this->errors = $errors;
+        return $this;
+    }
+
+    function getErrors() {
+        $errors = $this->errors ?? [];
+        $fullErrors = [];
+        if ($this->formatErrors === true) {
+            foreach ($errors as $key => $message) {
+                $fullErrors[] = [
+                    'key' => $key,
+                    'value' => $message,
                 ];
             }
+            return $fullErrors;
         }
         return $errors;
     }
 
-    static function ApiSuccessResponse($data = [], $message = '') {
-        return self::ApiResponse(200, $data, $message);
+    function formatErrors() {
+        $this->formatErrors = true;
+        return $this;
     }
 
-    static function ApiAuthResponse($errors = [], $message = 'Unauthorized') {
-        return self::ApiResponse(401, [MsgError('Unauthorized', 'please login')], $message);
+    function build() {
+        $json = [
+            'status' => (int) $this->getStatus(),
+            'message' => $this->getMessage(),
+            'errors' => $this->getErrors(),
+            'data' => $this->getData(),
+        ];
+        $this->appendDebug($json);
+        $_json = array_merge($json, $this->getAttributes());
+        return response()->json($_json, $this->getStatus());
     }
 
-    static function ApiErrorResponse($errors = [], $message = 'please login') {
-        if (isset($errors[0]['value'])) {
-            $message = $errors[0]['value'];
-        }
-        return self::ApiResponse(400, $errors, $message);
-    }
-
-    static function ApiResponse($status = 200, $data = [], $message = "") {
-        $record['status'] = $status;
-        $record['message'] = $message;
-        $record['success'] = ($status == 200) ? true : false;
-        $record['data'] = $data;
+    private function appendDebug(&$json) {
         if (env('APP_API_DEBUG')) {
-            $reflector = new \ReflectionClass(explode('@', request()->route()->getActionName())[0]);
-            $record['debug']['route'] = [
+            $actionParts = explode('@', request()->route()->getActionName());
+            $class = $actionParts[0];
+            $method = $actionParts[1];
+            $reflector = new \ReflectionClass($class);
+            $methodReflector = new \ReflectionMethod($class, $method);
+            $debug['route'] = [
                 'controller' => request()->route()->getAction(),
                 'path' => $reflector->getFileName(),
+                'method' => $method,
+                'line' => $methodReflector->getStartLine()
             ];
-            //$record['debug']['stack'] = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
         }
-        return response()->json($record, $status);
+        if (isset($debug)) {
+            $json['debug'] = $debug;
+        }
     }
 
 }
