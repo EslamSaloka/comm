@@ -21,5 +21,8 @@ php artisan component:view {component_name} --type=index --type=edit --type=crea
 for create migrate
 php artisan component:migrate {component_name} --M=file_name
 ````````````````
-
+# ENV
+```````````````
+GOOGLE_API_KEY=GOOHELASASDASDASDASSDS
+```````````````
 
