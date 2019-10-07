@@ -27,21 +27,21 @@ GOOGLE_API_KEY=GOOHELASASDASDASDASSDS
 ```````````````
 # Helpers
 ```````````````
-50123456755552
+$number = 50123456755552
 sanitize_mobile($number) >> 966501234567
 -------
 $info = 'place_id' || 'address_name';
 GetPlaceInformation($lat,$lng,$info)
---------------------
+-------
 create input
 from_input($name, $label, $type = 'text', $value = '', $lang = null, $autocomplete = null)
 -----
 create text area
 from_input_textarea($name, $label, $value = '', $lang = '')
-```````````````
+-----
 create from image
 from_image($name, $value = '', $label,$multiple = false)
-```````````````
+-----
 Upload image
 file_upload($file, $path = '', $wh = [], $base64 = false, $watermark = false)
 ```````````````
