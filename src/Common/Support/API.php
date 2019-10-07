@@ -2,7 +2,7 @@
 
 namespace Tasawk\TasawkComponent\Common\Support;
 
-use App\Exceptions\Errors\Http as HttpErrors;
+use Tasawk\TasawkComponent\Common\Support\Http as HttpErrors;
 
 class API {
 
