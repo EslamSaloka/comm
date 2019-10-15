@@ -254,6 +254,15 @@ if (!function_exists('from_image')) {
 
 }
 
+if (!function_exists('BaseImage')) {
+
+    function BaseImage($img) {
+        $img = str_replace(['data:image/png;base64,', 'data:image/jpeg;base64,', 'data:image/jpg;base64,'], '', $img);
+        $data = base64_decode($img);
+        return $data;
+    }
+
+}
 
 if (!function_exists('file_upload')) {
 
@@ -263,7 +272,7 @@ if (!function_exists('file_upload')) {
             mkdir($destinationPath, 0755, true);
         }
         if ($base64 == true) {
-            $file = Image::make(base64_decode($file));
+            $file = Image::make(BaseImage($file));
             $input = md5(time() . rand(10000, 99999)) . '.jpg';
         } else {
             $input = md5(time() . rand(10000, 99999)) . '.' . $file->getClientOriginalExtension();
