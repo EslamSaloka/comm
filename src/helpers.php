@@ -295,6 +295,18 @@ if (!function_exists('from_input_select')) {
 }
 
 
+if (!function_exists('vue_srcs')) {
+
+    function vue_srcs() {
+        echo <<<HTML
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+HTML;
+    }
+
+}
+
 if (!function_exists('GetPlaceInformation')) {
 
     function GetPlaceInformation($lat, $lng, $info = 'place_id') {
