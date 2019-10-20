@@ -11,13 +11,18 @@
         {!! AssetsAdmin('components.css') !!}
         {!! AssetsAdmin('colors.css') !!}
         <!-- /global stylesheets -->
-
+        <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
         <!-- Core JS files -->
         {!! AssetsAdmin('plugins/loaders/pace.min.js','js') !!}
         {!! AssetsAdmin('core/libraries/jquery.min.js','js') !!}
         {!! AssetsAdmin('core/libraries/bootstrap.min.js','js') !!}
         {!! AssetsAdmin('plugins/loaders/blockui.min.js','js') !!}
-
+        <style>
+            *{
+                font-family: 'Cairo', sans-serif;
+            }
+        </style>
     </head>
 
     <body class="login-container bg-slate-800" style=" background: url({{ url('assets/admin/assets/images/login_cover.jpg') }}); background-size: cover; ">
@@ -74,7 +79,9 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn bg-blue btn-block"> <?php echo __('Login'); ?> <i class="icon-circle-left2 position-right"></i></button>
+                                    <button type="submit" class="btn bg-blue btn-block"> 
+                                        <?php echo __('Login'); ?> 
+                                    </button>
                                 </div>
                             </div>
                         </form>
