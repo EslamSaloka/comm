@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ env('APP_NAME') }} - <?php echo __('The control panel'); ?> </title>
+        <title>@lang(env('APP_NAME')) - <?php echo __('The control panel'); ?> </title>
         {!! AssetsAdmin('icons/icomoon/styles.css') !!}
         {!! AssetsAdmin('bootstrap.css') !!}
         {!! AssetsAdmin('core.css') !!}

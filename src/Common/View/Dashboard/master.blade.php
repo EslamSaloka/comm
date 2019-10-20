@@ -11,7 +11,7 @@
             @else
             @yield('title')
             @endif
-            | {{ env('APP_NAME') }}
+            | @lang(env('APP_NAME'))
         </title>
         <!-- Global stylesheets -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -54,7 +54,7 @@
         <div class="navbar navbar-default header-highlight">
             <div class="navbar-header">
                 <a class="navbar-brand" href="{{ route('dashboard.Dindex') }}" style="color: #fff;font-size: 30px;">
-                    {{ env('APP_NAME') }}
+                    @lang(env('APP_NAME'))
                 </a>
                 <ul class="nav navbar-nav visible-xs-block">
                     <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
