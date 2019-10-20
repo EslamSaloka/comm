@@ -207,16 +207,7 @@ if (!function_exists('from_input')) {
             $autocomplete = '';
         }
         $label = __($label);
-        echo <<<HTML
-        <div class='form-group'>
-        <label for='$name' class='control-label col-lg-2'>$label</label>
-        <div class='col-md-10'>
-                <input 
-                    dir='auto'
-                    id='{$name}' type='$type' $autocomplete class='form-control' name='$name' value='$value' />
-        </div>
-    </div>
-HTML;
+        return view('inputs.input' , get_defined_vars());
     }
 
 }
