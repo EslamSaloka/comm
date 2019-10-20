@@ -22,17 +22,6 @@ if (!function_exists('AssetsMain')) {
 
 }
 
-if (!function_exists('MsgError')) {
-
-    function MsgError($key, $message) {
-        return [
-            'key' => $key,
-            'value' => __($message),
-        ];
-    }
-
-}
-
 if (!function_exists('DashBoardReportsType')) {
 
     function DashBoardReportsType($val = null) {
@@ -47,6 +36,7 @@ if (!function_exists('DashBoardReportsType')) {
     }
 
 }
+
 if (!function_exists('DashBoardReports')) {
 
     function DashBoardReports() {
@@ -305,38 +295,10 @@ if (!function_exists('from_input_select')) {
 }
 
 
-
-if (!function_exists('WebSettingGet')) {
-
-    function WebSettingGet($var, $default = null) {
-        static $dbdata = null;
-        if ($dbdata == null) {
-            $dbdata = \App\Components\Option\Model\Option::all()->toArray();
-        }
-        $data = array_column($dbdata, 'value', 'key');
-        return isset($data[$var]) ? $data[$var] : $default;
-    }
-
-}
-
-
-
-if (!function_exists('WebSettingInput')) {
-
-    function WebSettingInput($key, $value, $type = 'text') {
-        if ($type != 'image') {
-            return from_input($key, $value, $type, WebSettingGet($key));
-        } else {
-            return from_image($key, WebSettingGet($key),$key);
-        }
-    }
-
-}
-
 if (!function_exists('GetPlaceInformation')) {
 
     function GetPlaceInformation($lat, $lng, $info = 'place_id') {
-        $url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&sensor=true&key=AIzaSyDJl_wkkIlZvHFV2K9X8G6hYVaD6L_ndso";
+        $url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&sensor=true&key=".env('MAP_API_KEY');
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -360,18 +322,6 @@ if (!function_exists('GetPlaceInformation')) {
 
 }
 
-if (!function_exists('vue_srcs')) {
-
-    function vue_srcs() {
-        echo <<<HTML
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
-HTML;
-    }
-
-}
-
 if (!function_exists('gen_temp_email')) {
 
     function gen_temp_email($mobile) {
@@ -385,76 +335,6 @@ if (!function_exists('sanitize_mobile')) {
         $number = preg_replace('/\s+/', '', $number);
         $number = '966' . substr((string) $number, -9);
         return $number;
-    }
-
-}
-
-if (!function_exists('cart_get_product')) {
-
-    function cart_get_product($id) {
-        return Cart::get($id);
-    }
-
-}
-
-if (!function_exists('cart_get_product_qty')) {
-
-    function cart_get_product_qty($id) {
-        $product = cart_get_product($id);
-        return $product ? $product->quantity : 0;
-    }
-
-}
-
-if (!function_exists('cart_get_total')) {
-
-    function cart_get_total() {
-        return Cart::getTotal();
-    }
-
-    if (!function_exists('cart_get_payment_total')) {
-
-        function cart_get_payment_total() {
-            return str_replace([',', '.'], '', (string) cart_get_total());
-        }
-
-    }
-}
-
-if (!function_exists('blade_request_message')) {
-
-    function blade_request_message($message = '', $type = 'error') {
-        return [
-            'text' => $message,
-            'icon' => WebSettingGet("{$type}_icon", defult_color($type)['icon']),
-            'color' => WebSettingGet("{$type}_color", defult_color($type)['color']),
-            'text_color' => WebSettingGet("{$type}_text_color", defult_color($type)['text_color']),
-        ];
-    }
-
-}
-
-if (!function_exists('defult_color')) {
-
-    function defult_color($type = 'error') {
-        $defult = [
-            'error' => [
-                'icon' => 'fas fa-info-circle',
-                'color' => '#ff4141',
-                'text_color' => '#ffffff',
-            ],
-            'info' => [
-                'icon' => 'fas fa-question-circle',
-                'color' => '#e6f6fb',
-                'text_color' => '#000000',
-            ],
-            'success' => [
-                'icon' => 'fas fa-check-circle',
-                'color' => '#76b042',
-                'text_color' => '#ffffff',
-            ],
-        ];
-        return $defult[$type];
     }
 
 }

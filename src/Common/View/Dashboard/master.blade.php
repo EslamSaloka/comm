@@ -11,7 +11,7 @@
             @else
             @yield('title')
             @endif
-            | Afnan
+            | {{ env('APP_NAME') }}
         </title>
         <!-- Global stylesheets -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -53,7 +53,8 @@
         <!-- Main navbar -->
         <div class="navbar navbar-default header-highlight">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{{ route('dashboard.Dindex') }}">
+                <a class="navbar-brand" href="{{ route('dashboard.Dindex') }}" style="color: #fff;font-size: 30px;">
+                    {{ env('APP_NAME') }}
                 </a>
                 <ul class="nav navbar-nav visible-xs-block">
                     <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -66,7 +67,6 @@
                 </ul>
                 <div class="navbar-right">
                     <p class="navbar-text">{{ auth()->user()->name }}</p>
-                    <p class="navbar-text"><span class="label bg-success">@lang('Online')</span></p>
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
                             <a href="{{ url('/') }}">

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title></title>
+        <title>{{ env('APP_NAME') }} - <?php echo __('The control panel'); ?> </title>
         {!! AssetsAdmin('icons/icomoon/styles.css') !!}
         {!! AssetsAdmin('bootstrap.css') !!}
         {!! AssetsAdmin('core.css') !!}
@@ -20,7 +20,7 @@
 
     </head>
 
-    <body class="login-container bg-slate-800">
+    <body class="login-container bg-slate-800" style=" background: url({{ url('assets/admin/assets/images/login_cover.jpg') }}); background-size: cover; ">
 
         <!-- Page container -->
         <div class="page-container">
@@ -39,12 +39,12 @@
                             @csrf
                             <div class="panel panel-body login-form">
                                 <div class="text-center">
-                                    <div class="icon-object border-warning-400 text-warning-400"><i class="icon-people"></i></div>
-                                    <h5 class="content-group-lg">لوحه تحكم الإداره <small class="display-block">برجاء تسجيل الدخول</small></h5>
+                                    <div class="icon-object border-warning-400 text-warning-400"><i class="icon-lock"></i></div>
+                                    <h5 class="content-group-lg"><?php echo __('The control panel'); ?> <small class="display-block"><?php echo __('Please sign in'); ?></small></h5>
                                 </div>
 
                                 <div class="form-group has-feedback has-feedback-left">
-                                    <input type="text" class="form-control" name="username" placeholder="إسم المستخدم">
+                                    <input type="text" class="form-control" name="username" placeholder="<?php echo __('Username'); ?>">
                                     <div class="form-control-feedback">
                                         <i class="icon-user text-muted"></i>
                                     </div>
@@ -56,7 +56,7 @@
                                 </div>
 
                                 <div class="form-group has-feedback has-feedback-left">
-                                    <input type="password" class="form-control" name="password" placeholder="كلمه المرور">
+                                    <input type="password" class="form-control" name="password" placeholder="<?php echo __('Password'); ?>">
                                     <div class="form-control-feedback">
                                         <i class="icon-lock2 text-muted"></i>
                                     </div>
@@ -74,7 +74,7 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn bg-blue btn-block">تسجيل الدخول <i class="icon-circle-left2 position-right"></i></button>
+                                    <button type="submit" class="btn bg-blue btn-block"> <?php echo __('Login'); ?> <i class="icon-circle-left2 position-right"></i></button>
                                 </div>
                             </div>
                         </form>
