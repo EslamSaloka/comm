@@ -42,7 +42,7 @@ if (!function_exists('DashBoardReports')) {
     function DashBoardReports() {
         $dashboardMenus = '';
 
-        $glob = glob(__DIR__ . '/**/Resources/Reports/*.php');
+        $glob = glob(app_path('/Components') . '/**/Resources/Reports/*.php');
         $f = collect($glob)->groupBy(
                 function ($el) {
             return pathinfo($el)['filename'];

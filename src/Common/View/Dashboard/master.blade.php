@@ -88,7 +88,7 @@
                         <div class="sidebar-user-material">
                             <div class="category-content">
                                 <div class="sidebar-user-material-content">
-                                    <a href="#"><img src="{{ url('assets/admin/assets/images/placeholder.jpg') }}" class="img-circle img-responsive" alt=""></a>
+                                    <a href="#"><img src="{{ auth()->user()->display_image }}" class="img-circle img-responsive" alt=""></a>
                                     <h6>{{ auth()->user()->name }}</h6>
                                 </div>
                                 <div class="sidebar-user-material-menu">
@@ -134,7 +134,7 @@
             </div>
             <!-- /page content -->
         </div>
-        <!-- /page container -->.
+        <!-- /page container -->
         <script>
             $('.delete-record').click(function (e) {
                 if (!confirm("@lang('Are You sure?')")) {
