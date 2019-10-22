@@ -97,7 +97,7 @@
                     <p class="navbar-text">{{ auth()->user()->name }}</p>
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a href="{{ url('/') }}">
+                            <a href="{{ url('/') }}" target="_blank">
                                 <i class=" icon-home2"></i>
                             </a>
                         </li>
