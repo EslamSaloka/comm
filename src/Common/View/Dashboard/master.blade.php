@@ -25,48 +25,15 @@
             *{
                 font-family: 'Cairo', sans-serif;
             }
+            .pagination {
+                display: inline-block;
+            }
+
             .pagination li {
                 color: black;
-                display: inline-block;
+                float: left;
                 padding: 8px 16px;
                 text-decoration: none;
-            }
-            .panel .pagination{
-                display: block;
-                text-align: center;
-            }
-            .navbar-default .navbar-brand{
-                color: white;
-                font-size: 20px;
-            }
-            .navbar-brand{
-                padding: 15px 8px;
-            }
-            .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
-                color: white;
-            }
-            .navigation .navigation-header, .navigation .navigation-header a{
-                margin: 0;
-                padding: 0;
-            }
-            .navigation-header input{
-                width: 97%;
-                border: 1px solid;
-                display: block;
-                margin: 0 auto;
-                height: 31px;
-                padding: 10px;
-                color: black;
-            }
-            @media (min-width: 769px) {
-                .sidebar-xs .header-highlight .navbar-header .navbar-brand {
-                    background: none !important;
-                    margin-right: 7px;
-                }
-            }
-            .delete_list_table{
-                background: none;
-                border: 0px;
             }
         </style>
         <!-- /global stylesheets -->
@@ -86,7 +53,7 @@
         <!-- Main navbar -->
         <div class="navbar navbar-default header-highlight">
             <div class="navbar-header">
-                <a class="navbar-brand" target="_blank" href="{{ route('dashboard.Dindex') }}">
+                <a class="navbar-brand" href="{{ route('dashboard.Dindex') }}" style="color: #fff;font-size: 30px;">
                     @lang(env('APP_NAME'))
                 </a>
                 <ul class="nav navbar-nav visible-xs-block">
@@ -120,6 +87,10 @@
                         <!-- User menu -->
                         <div class="sidebar-user-material">
                             <div class="category-content">
+                                <div class="sidebar-user-material-content">
+                                    <a href="#"><img src="{{ auth()->user()->display_image }}" class="img-circle img-responsive" alt=""></a>
+                                    <h6>{{ auth()->user()->name }}</h6>
+                                </div>
                                 <div class="sidebar-user-material-menu">
                                     <a href="#user-nav" data-toggle="collapse"><span>@lang('My account')</span> <i class="caret"></i></a>
                                 </div>
@@ -164,6 +135,8 @@
             <!-- /page content -->
         </div>
         <!-- /page container -->
+        {!! AssetsAdmin('plugins/sweetalert.min.js','js') !!}
+        @include('DCommon::validator')
         <script>
             $('.delete-record').click(function (e) {
                 if (!confirm("@lang('Are You sure?')")) {
@@ -174,34 +147,6 @@
         <script>
             $(document).ready(function(){
                 $('[data-toggle="tooltip"]').tooltip(); 
-            });
-        </script>
-        <script>
-            if (localStorage.getItem('has-sidebar') === "false") {
-                $('body').addClass('sidebar-xs');
-            } else {
-                $('body').removeClass('sidebar-xs');
-            }
-            $('.sidebar-main-toggle').click(function () {
-                localStorage.setItem('has-sidebar', $('body').hasClass('sidebar-xs'));
-            });
-            //Search in navigation
-            $('.navigation-header input').keyup(function () {
-                var inputValue = $(this).val();
-                $('.navigation > li').not('.navigation-header').each(function (i, el) {
-                    var _el = $(el);
-                    var text = _el.find('span').first().text();
-                    if(text.trim() === ""){
-                        _el.show();
-                        return;
-                    }
-                    console.log(text.search(inputValue));
-                    if (text.search(inputValue) === -1) {
-                        _el.hide();
-                    } else {
-                        _el.show();
-                    }
-                });
             });
         </script>
         @stack('scripts')
