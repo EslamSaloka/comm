@@ -146,7 +146,7 @@ if (!function_exists('delete_list_from_table')) {
         echo '<form action="' . route($route, $id) . '" method="post">
         <input name="_method" type="hidden" value="delete">
         <input type="hidden" name="_token" id="csrf-token" value="' . Session::token() . '" />
-        <button type="submit" class="btn btn-danger delete-record" data-toggle="tooltip" title="'.__('delete').'"><i class="icon-trash"></i></button>
+        <button type="submit" class="delete-record delete_list_table"><i class="icon-trash"></i></button>
         </form>';
     }
 

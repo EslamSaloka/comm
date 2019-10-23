@@ -61,7 +61,12 @@
             @media (min-width: 769px) {
                 .sidebar-xs .header-highlight .navbar-header .navbar-brand {
                     background: none !important;
+                    margin-right: 7px;
                 }
+            }
+            .delete_list_table{
+                background: none;
+                border: 0px;
             }
         </style>
         <!-- /global stylesheets -->
@@ -97,7 +102,7 @@
                     <p class="navbar-text">{{ auth()->user()->name }}</p>
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a href="{{ url('/') }}" target="_blank">
+                            <a href="{{ url('/') }}">
                                 <i class=" icon-home2"></i>
                             </a>
                         </li>
@@ -143,7 +148,7 @@
                         <!-- Footer -->
                         <div class="footer text-muted">
                             &copy; {{ date('Y') }}.
-                            <a href="{{ url('/') }}" target="_blank">
+                            <a href="#">
                                 @lang('Project')
                             </a> by
                             <a href="https://tasawk.com.sa" target="_blank">
