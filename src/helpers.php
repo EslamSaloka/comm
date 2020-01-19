@@ -334,13 +334,6 @@ if (!function_exists('GetPlaceInformation')) {
 
 }
 
-if (!function_exists('gen_temp_email')) {
-
-    function gen_temp_email($mobile) {
-        return $mobile . '-afnan@afnan.com';
-    }
-
-}
 if (!function_exists('sanitize_mobile')) {
 
     function sanitize_mobile($number) {
@@ -363,4 +356,53 @@ if (!function_exists('MsgError')) {
         ];
     }
 
+}
+
+if (!function_exists('ApiValidation')) {
+
+    function ApiValidation($Request = [], $rules = [], $except = [], $messages = [])
+    {
+        $errors = [];
+        $validator = \Validator::make($Request, $rules, $messages);
+        if ($validator->fails()) {
+            foreach ($validator->errors()->toArray() as $k => $v) {
+                if (in_array($k, $except)) {
+                    continue;
+                }
+                $errors[] = [
+                    'key' => $k,
+                    'value' => __($v[0])
+                ];
+            }
+        }
+        return $errors;
+    }
+}
+
+if (!function_exists('api_model_set_pagenation')) {
+
+    function api_model_set_pagenation($model)
+    {
+        $pagnation['total'] = $model->total();
+        $pagnation['lastPage'] = $model->lastPage();
+        $pagnation['perPage'] = $model->perPage();
+        $pagnation['currentPage'] = $model->currentPage();
+        return $pagnation;
+    }
+}
+
+if (!function_exists('WebSettingInput')) {
+
+    function WebSettingInput($key, $value, $type = 'text')
+    {
+        if ($type != 'image') {
+            if ($type == 'textarea') {
+                return from_input_textarea($key, $key, WebSettingGet($key));
+            } else {
+                return from_input($key, $value, $type, WebSettingGet($key));
+            }
+        } else {
+            return from_image($key, WebSettingGet($key), $key);
+        }
+    }
 }
