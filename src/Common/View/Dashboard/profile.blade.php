@@ -14,7 +14,7 @@
         <form class="form-horizontal" method="post" action="{{ route('dashboard.DProfile.update') }}" enctype="multipart/form-data">
             <fieldset>
                 <legend class="text-bold"><?php echo __('Profile') ?></legend>
-                {!! from_input('username','Username','text',\Auth::user()->username) !!}
+                {!! from_input('name','Name','text',\Auth::user()->name) !!}
                 {!! from_input('email','Email','email',\Auth::user()->email) !!}
                 {!! from_input('password','Password','password') !!}
                 <div class="text-right">
