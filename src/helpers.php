@@ -187,12 +187,12 @@ if (!function_exists('from_submit')) {
 
 if (!function_exists('from_input')) {
 
-    function from_input($name, $label, $type = 'text', $value = '', $lang = null, $autocomplete = null) {
+    function from_input($name, $label, $type = 'text', $value = '', $lang = null, $autocomplete = null,$divID = null) {
         if ($lang) {
             $name = $lang . '[' . $name . ']';
         }
         if ($autocomplete) {
-            $autocomplete = "autocomplete='$autocomplete'";
+            $autocomplete = "autocomplete=$autocomplete";
         } else {
             $autocomplete = '';
         }
@@ -220,7 +220,7 @@ if (!function_exists('from_input_textarea')) {
 
 if (!function_exists('from_image')) {
 
-    function from_image($name, $value = '', $label,$multiple = false) {
+    function from_image($name, $value = '', $label,$multiple = false,$lang = null) {
         $multiple = ($multiple) ? 'multiple' : '';
         $name = ($multiple) ? $name . '[]' : $name;
         $value = ($value == '') ? '' : url($value);
@@ -229,6 +229,7 @@ if (!function_exists('from_image')) {
         if ($value != '') {
             $input .= '<img src="' . $value . '" style=" width: 50px; height: 50px;margin-bottom: 10px;"/>';
         }
+        $name = (!is_null($lang)) ? "{$lang}[{$name}]" : $name;
         $input .= '<input type="file" name="' . $name . '" class="file-styled" ' . $multiple . '>';
         $input .= '</div>';
         return $input;

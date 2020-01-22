@@ -99,7 +99,6 @@
                     <li><a class="sidebar-control sidebar-main-toggle hidden-xs legitRipple"><i class="icon-paragraph-justify3"></i></a></li>
                 </ul>
                 <div class="navbar-right">
-                    <p class="navbar-text">{{ auth()->user()->name }}</p>
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
                             <a href="{{ url('/') }}">
@@ -149,7 +148,7 @@
                         <div class="footer text-muted">
                             &copy; {{ date('Y') }}.
                             <a href="#">
-                                @lang('Project')
+                                {{ env('APP_NAME') }}
                             </a> by
                             <a href="https://tasawk.com.sa" target="_blank">
                                 @lang('Tasawk')
@@ -164,7 +163,6 @@
             <!-- /page content -->
         </div>
         <!-- /page container -->
-        {!! AssetsAdmin('plugins/sweetalert.min.js','js') !!}
         @include('DCommon::validator')
         <script>
             $('.delete-record').click(function (e) {
