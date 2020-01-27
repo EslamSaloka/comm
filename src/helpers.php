@@ -78,6 +78,12 @@ if (!function_exists('DashBoardReports')) {
 
 }
 
+if (!function_exists('sortByOrder')) {
+    function sortByOrder($a, $b) {
+        return $a['order'] - $b['order'];
+    }
+}
+
 if (!function_exists('AdminMenu')) {
 
     function AdminMenu() {
@@ -98,7 +104,10 @@ if (!function_exists('AdminMenu')) {
             return collect(array_filter($data));
         }
         );
-        foreach ($f->get('menu') as $main_item) {
+
+        $menuSort = $f->get('menu')->toArray();
+        usort($menuSort, 'sortByOrder');
+        foreach ($menuSort as $main_item) {
             $icon = isset($main_item['icon']) ? $main_item['icon'] : '';
             $title = isset($main_item['title']) ? __($main_item['title']) : '';
             $hasItems = isset($main_item['items']) && !empty($main_item['items']);
@@ -279,13 +288,24 @@ if (!function_exists('file_upload')) {
 
 if (!function_exists('from_input_select')) {
 
-    function from_input_select($array, $name, $lable, $select = 0) {
+    function from_input_select($array, $name, $lable, $select = 0, $hide_lable = false, $multiple = false) {
         $input = '<div class="col-md-12">';
-        $input .= '<span>' . __($lable) . '</span>';
-        $input .= '<select data-placeholder="' . __($lable) . '" class="select-size-lg" name="' . $name . '">';
+        $selected = '';
+        if (!$hide_lable) {
+            $input .= '<span>' . __($lable) . '</span>';
+        }
+        if ($multiple) {
+            $input .= '<select multiple="multiple" class="select" name="' . $name . '">';
+        } else {
+            $input .= '<select data-placeholder="' . __($lable) . '" class="select-size-lg" name="' . $name . '">';
+        }
         $input .= '<option value="">' . __("All $lable") . '</option>';
         foreach ($array as $value) {
-            $selected = ($value->id == $select) ? 'selected' : '';
+            if (is_array($select)) {
+                $selected = (in_array($value->id, $select)) ? 'selected' : '';
+            } else {
+                $selected = ($value->id == $select) ? 'selected' : '';
+            }
             $input .= "<option value='$value->id' $selected>$value->name</option>";
         }
         $input .= '</select>';
