@@ -1,6 +1,10 @@
 @if($option['Model']::Reports)
     <div class="col-sm-6 col-md-3">
-        <a href="{{ route('dashboard.'.$option['url']) }}" target="_blank">
+        @if ($option['url'] == '#')
+            <a href="#!" target="_blank">
+        @else
+            <a href="{{ route('dashboard.'.$option['url']) }}" target="_blank">
+        @endif
             <div class="panel panel-body panel-body-accent">
                 <div class="media no-margin">
                     <div class="media-left media-middle">
