@@ -1,0 +1,8 @@
+{
+    "styles": [],
+    "scripts": [
+        "pages/form_select2.js",
+        "plugins/forms/selects/select2.min.js"
+    ],
+    "footer_scripts": []
+}

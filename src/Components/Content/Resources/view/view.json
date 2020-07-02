@@ -1,0 +1,15 @@
+{
+    "styles": [],
+    "scripts": [
+        "pages/form_select2.js",
+        "plugins/forms/selects/select2.min.js",
+        "core/libraries/jquery_ui/interactions.min.js",
+        "plugins/editors/summernote/summernote.min.js"
+    ],
+    "footer_scripts": [
+        "pages/editor_summernote.js"
+    ]
+}
+
+
+
