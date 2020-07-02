@@ -194,6 +194,8 @@
             $(document).ready(function(){
                 $('[data-toggle="tooltip"]').tooltip(); 
             });
+            $(window).on("load",function(){$("#PageLoader").css("display","none")});
+        
         </script>
         <script>
             if (localStorage.getItem('has-sidebar') === "false") {
