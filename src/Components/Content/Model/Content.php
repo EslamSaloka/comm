@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Content extends Model {
 
-    use \Astrotomic\Translatable\Translatable;
+    use \Dimsav\Translatable\Translatable;
 
     protected $translationForeignKey = "content_id";
     public $translatedAttributes = [

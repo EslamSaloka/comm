@@ -8,7 +8,7 @@ use App\Components\Stores\Model\Stores;
 
 class Type extends Model {
 
-    use \Astrotomic\Translatable\Translatable;
+    use \Dimsav\Translatable\Translatable;
 
     const Reports = true;
 

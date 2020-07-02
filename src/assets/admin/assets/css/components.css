@@ -148,7 +148,7 @@ a.badge,
  *
  * ---------------------------------------------------------------------------- */
 .sidebar {
-  background-color: #263238;
+  background:linear-gradient( 0deg, rgb(13,135,228) 0%, rgb(73,171,244) 100%);
   color: #fff;
   position: relative;
   width: 100%;
@@ -265,7 +265,7 @@ a.badge,
 }
 .sidebar-user-material-menu {
   margin: -20px;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 .sidebar-user-material-menu > a {
   padding: 10px 20px;

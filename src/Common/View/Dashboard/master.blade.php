@@ -122,12 +122,12 @@
             </div>
             <div class="navbar-collapse collapse" id="navbar-mobile">
                 <ul class="nav navbar-nav">
-                    <li><a class="sidebar-control sidebar-main-toggle hidden-xs legitRipple"><i class="icon-paragraph-justify3"></i></a></li>
+                    <li><a class="sidebar-control sidebar-main-toggle hidden-xs legitRipple" style="color: white;"><i class="icon-paragraph-justify3"></i></a></li>
                 </ul>
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a href="{{ url('/') }}">
+                            <a href="{{ url('/') }}" style="color: white;">
                                 <i class=" icon-home2"></i>
                             </a>
                         </li>

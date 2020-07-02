@@ -18,7 +18,7 @@
  *  Latest update: May 25, 2015
  *
  * ---------------------------------------------------------------------------- */
-@font-face {
+ @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('../css/icons/glyphicons/glyphicons-halflings-regular.eot');
   src: url('../css/icons/glyphicons/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../css/icons/glyphicons/glyphicons-halflings-regular.woff2') format('woff2'), url('../css/icons/glyphicons/glyphicons-halflings-regular.woff') format('woff'), url('../css/icons/glyphicons/glyphicons-halflings-regular.ttf') format('truetype'), url('../css/icons/glyphicons/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
@@ -3575,7 +3575,7 @@ select[multiple].input-group-xs > .input-group-btn > .btn {
   }
 }
 .header-highlight .navbar-header:not([class*=bg-]) {
-  background-color: #263238;
+  /* background-color: #263238; */
 }
 .header-highlight .navbar-header > .navbar-nav > li > a {
   color: rgba(255, 255, 255, 0.9);
