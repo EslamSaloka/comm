@@ -11,6 +11,7 @@ composer require tasawk/component:dev-master
     Tasawk\TasawkComponent\TasawkServiceProvider::class,
   ];
 php artisan vendor:publish --tag=public_assets --force
+php artisan vendor:publish --tag=public_views --force
 ``````````````
 # Used
 ```````````````
