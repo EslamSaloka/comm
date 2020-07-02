@@ -25,6 +25,18 @@
             *{
                 font-family: 'Cairo', sans-serif;
             }
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1; 
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #339eee; 
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555; 
+            }
             .pagination li {
                 color: black;
                 display: inline-block;
@@ -58,6 +70,9 @@
                 padding: 10px;
                 color: black;
             }
+            .header-highlight{
+                background: linear-gradient( 0deg, rgb(13,135,228) 0%, rgb(73,171,244) 100%);
+            }
             @media (min-width: 769px) {
                 .sidebar-xs .header-highlight .navbar-header .navbar-brand {
                     background: none !important;
@@ -68,7 +83,18 @@
                 background: none;
                 border: 0px;
             }
+            #PageLoader{
+                z-index: 99999;
+                position: fixed;
+                background: #359fef;
+                width: 100%;
+                height: 100vh;
+                top: 0px;
+                padding-top: 20%;
+                padding-right: 42%;
+            }
         </style>
+        @include('admin.styles')
         <!-- /global stylesheets -->
         <!-- Core JS files -->
         {!! AssetsAdmin('plugins/loaders/pace.min.js','js') !!}
@@ -105,6 +131,11 @@
                                 <i class=" icon-home2"></i>
                             </a>
                         </li>
+                        <li class="dropdown">
+                            <a href="{{ route('Dlogout') }}" style="color: white;">
+                                <i class=" icon-switch2"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -120,47 +151,35 @@
                         <div class="sidebar-user-material">
                             <div class="category-content">
                                 <div class="sidebar-user-material-menu">
-                                    <a href="#user-nav" data-toggle="collapse"><span>@lang('My account')</span> <i class="caret"></i></a>
+                                    <a href="{{ route('dashboard.DProfile.index') }}"><span>@lang('My profile')</span></a>
                                 </div>
                             </div>
-                            <div class="navigation-wrapper collapse" id="user-nav">
-                                <ul class="navigation">
-                                    <li><a href="{{ route('dashboard.DProfile.index') }}"><i class="icon-user-plus"></i> <span>@lang('My profile')</span></a></li>
-                                    <li><a href="{{ route('Dlogout') }}"><i class="icon-switch2"></i> <span>@lang('Logout')</span></a></li>
-                                </ul>
-                            </div>
                         </div>
-                        <!-- /user menu -->
-                        <!-- Main navigation -->
                         @include('DCommon::layouts.menu')
                         @include('DCommon::layouts.styles')
-                        <!-- /main navigation -->
                     </div>
                 </div>
-                <!-- /main sidebar -->
-                <!-- Main content -->
                 <div class="content-wrapper">
                     @include('DCommon::layouts.page_header')
-                    <!-- Content area -->
+                    @component('admin.breadcrumb',['array'=>$array??[],'new'=>$new??[]])@endcomponent
                     <div class="content">
                         @yield('content')
-                        <!-- Footer -->
                         <div class="footer text-muted">
                             &copy; {{ date('Y') }}.
                             <a href="#">
-                                {{ env('APP_NAME') }}
-                            </a> by
+                                @lang(env('APP_NAME'))
+                            </a> @lang('Design And Development By')
                             <a href="https://tasawk.com.sa" target="_blank">
                                 @lang('Tasawk')
                             </a>
                         </div>
-                        <!-- /footer -->
                     </div>
-                    <!-- /content area -->
                 </div>
-                <!-- /main content -->
             </div>
             <!-- /page content -->
+        </div>
+        <div id="PageLoader">
+            <img src="{{ url('assets/admin/assets/images/logo.png') }}" alt="@lang(env('APP_NAME'))" style="width: 30%;">
         </div>
         <!-- /page container -->
         @include('DCommon::validator')
@@ -204,6 +223,7 @@
                 });
             });
         </script>
+        @include('admin.scripts')
         @stack('scripts')
         @stack('footer_scripts')
     </body>

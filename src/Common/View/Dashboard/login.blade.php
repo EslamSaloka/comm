@@ -22,29 +22,21 @@
             *{
                 font-family: 'Cairo', sans-serif;
             }
+            body{
+                background: linear-gradient( 0deg, rgb(13,135,228) 0%, rgb(73,171,244) 100%);
+            }
         </style>
     </head>
-
-    <body class="login-container bg-slate-800" style=" background: url({{ url('assets/admin/assets/images/login_cover.jpg') }}); background-size: cover; ">
-
-        <!-- Page container -->
+    <body class="login-container bg-slate-800">
         <div class="page-container">
-
-            <!-- Page content -->
             <div class="page-content">
-
-                <!-- Main content -->
                 <div class="content-wrapper">
-
-                    <!-- Content area -->
-                    <div class="content">
-
-                        <!-- Advanced login -->
+                    <div class="content" style="text-align: center;">
                         <form action="{{ Route('loginCheck') }}" method="post">
                             @csrf
+                            <img src="{{ url('assets/admin/assets/images/logo.png') }}" alt="@lang(env('APP_NAME'))" style="width: 13%;margin-bottom: 50px;margin-top: 50px;">
                             <div class="panel panel-body login-form">
                                 <div class="text-center">
-                                    <div class="icon-object border-warning-400 text-warning-400"><i class="icon-lock"></i></div>
                                     <h5 class="content-group-lg"><?php echo __('The control panel'); ?> <small class="display-block"><?php echo __('Please sign in'); ?></small></h5>
                                 </div>
 
@@ -74,30 +66,22 @@
                                 <div class="form-group has-feedback has-feedback-left">
                                     @if (session('falde'))
                                     <span class="invalid-feedback" role="alert-danger">
-                                        <strong>{{ session('falde') }}</strong>
+                                        <strong style="color: #a30000;">{{ session('falde') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn bg-blue btn-block"> 
+                                    <button type="submit" class="btn bg-blue btn-block" style="rgb(15, 39, 136)"> 
                                         <?php echo __('Login'); ?> 
                                     </button>
                                 </div>
                             </div>
                         </form>
-                        <!-- /advanced login -->
-
                     </div>
-                    <!-- /content area -->
-
                 </div>
-                <!-- /main content -->
-
             </div>
-            <!-- /page content -->
-
         </div>
-        <!-- /page container -->
-
     </body>
 </html>
+<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+{!! JsValidator::formRequest('Tasawk\TasawkComponent\Common\Requests\Dashboard\LoginRequest') !!}

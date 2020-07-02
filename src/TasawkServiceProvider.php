@@ -48,6 +48,11 @@ class TasawkServiceProvider extends ServiceProvider {
         $this->publishes([
             __DIR__.'/assets' => public_path('/assets'),
         ], 'public_assets');
+        $this->publishes([
+            __DIR__.'/views/admin' => resource_path('views'),
+            __DIR__.'/views/email' => resource_path('views'),
+            __DIR__.'/views/inputs' => resource_path('views'),
+        ], 'public_views');
     }
 
     private function loadHelpers() {
