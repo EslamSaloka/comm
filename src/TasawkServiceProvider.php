@@ -49,9 +49,7 @@ class TasawkServiceProvider extends ServiceProvider {
             __DIR__.'/assets' => public_path('/assets'),
         ], 'public_assets');
         $this->publishes([
-            __DIR__.'/views/admin' => resource_path('views'),
-            __DIR__.'/views/email' => resource_path('views'),
-            __DIR__.'/views/inputs' => resource_path('views'),
+            __DIR__.'/views' => resource_path('views'),
         ], 'public_views');
         $this->publishes([
             __DIR__.'/Components' => app_path('Components'),
