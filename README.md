@@ -12,6 +12,8 @@ composer require tasawk/component:dev-master
   ];
 php artisan vendor:publish --tag=public_assets --force
 php artisan vendor:publish --tag=public_views --force
+php artisan vendor:publish --tag=public_components --force
+php artisan vendor:publish --tag=public_model --force
 ``````````````
 # Used
 ```````````````
