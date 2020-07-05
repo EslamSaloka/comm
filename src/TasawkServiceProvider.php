@@ -47,19 +47,11 @@ class TasawkServiceProvider extends ServiceProvider {
         // php artisan vendor:publish --tag=public_assets --force
         $this->publishes([
             __DIR__.'/assets' => public_path('/assets'),
-        ], 'public_assets');
-        $this->publishes([
             __DIR__.'/views' => resource_path('views'),
-        ], 'public_views');
-        $this->publishes([
             __DIR__.'/Components' => app_path('Components'),
-        ], 'public_components');
-        $this->publishes([
             __DIR__.'/Model' => app_path('/'),
-        ], 'public_model');
-        $this->publishes([
             __DIR__.'/config.php' => config_path('/'),
-        ], 'public_config');
+        ], 'public_all');
     }
 
     private function loadHelpers() {
