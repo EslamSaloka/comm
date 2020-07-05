@@ -37,7 +37,7 @@ class TasawkServiceProvider extends ServiceProvider {
         $this->loadWebRoutesFrontEnd();
 
         include __DIR__ . '/Common/Route/Dashboard.php';
-        $this->mergeConfig();
+        // $this->mergeConfig();
         $this->webArtisan();
         if (request()->is('dashboard*')) {
             view()->addNamespace('DCommon', _fixDirSeparator(__DIR__ . '/Common/View/Dashboard'));
@@ -57,6 +57,9 @@ class TasawkServiceProvider extends ServiceProvider {
         $this->publishes([
             __DIR__.'/Model' => app_path('/'),
         ], 'public_model');
+        $this->publishes([
+            __DIR__.'/config.php' => config_path('/'),
+        ], 'public_config');
     }
 
     private function loadHelpers() {

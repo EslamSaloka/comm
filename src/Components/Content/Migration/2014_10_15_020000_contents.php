@@ -29,7 +29,7 @@ class Contents extends Migration {
             $table->string('page_slug')->nullable();
             $table->string('header_image')->nullable();
             $table->longText('header_text')->nullable();
-            $table->json('content')->nullable();
+            $table->longText('content')->nullable();
             $table->longText('footer_text')->nullable();
             $table->string('footer_image')->nullable();
             $table->string('locale');

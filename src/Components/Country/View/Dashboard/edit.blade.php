@@ -26,10 +26,10 @@
                         <select name="parent" class="form-control">
                             <option value="0">@lang('Parent')</option>
                             @foreach ($countries as $c)
-                                <option @if($c->id == $country->id) selected @endif value="{{ $c->id }}">{{ $c->name }}</option>
+                                <option @if($c->id == $country->parent) selected @endif value="{{ $c->id }}">{{ $c->name }}</option>
                                 @if (count($c->children) > 0)
                                     @foreach ($c->children as $v)
-                                        <option @if($v->id == $country->id) selected @endif value="{{ $v->id }}">{{ $c->name }} - {{ $v->name }}</option>
+                                        <option @if($v->id == $country->parent) selected @endif value="{{ $v->id }}">{{ $c->name }} - {{ $v->name }}</option>
                                     @endforeach
                                 @endif
                             @endforeach

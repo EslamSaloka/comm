@@ -29,7 +29,7 @@ class Controller extends BaseController {
             $path_end = 'Dashboard';
         }
         foreach (config('config.Components') as $component) {
-            view()->addNamespace($component, __DIR__ . "/$component/View/$path_end");
+            view()->addNamespace($component, app_path("/Components/$component/View/$path_end"));
         }
         view()->addNamespace('this', _fixDirSeparator($basePath . 'View/' . $path_end));
     }

@@ -2,18 +2,12 @@
 
 return [
     'Components' => [
-        'Address',
-        'Banking',
-        'City',
-        'Common',
+        'Admin',
         'Contact',
         'Content',
+        'Country',
         'Locale',
         'Option',
-        'Order',
-        'Product',
-        'Subscription',
-        'User',
-        'Offers',
+        'User'
     ],
 ];
