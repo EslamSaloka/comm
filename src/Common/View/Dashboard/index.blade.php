@@ -4,7 +4,7 @@
 @foreach (DashBoardReports() as $key=>$item)
 <div class="row">
     @foreach ($item as $value)
-    @include('Common::layouts.Reports.'.$key,['option'=>$value])
+    @include('DCommon::layouts.Reports.'.$key,['option'=>$value])
     @endforeach
 </div>
 @endforeach
