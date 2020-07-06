@@ -49,7 +49,7 @@ class User extends Authenticatable
         if(self::checkPhone($phone['phone']) != '0') {
             return ['status'=>0,'error'=>__('This Phone Used Before')];
         }
-        if(self::checkPhone($phone['email']) != '0') {
+        if(self::checkPhone($request['email']) != '0') {
             return ['status'=>0,'error'=>__('This Email Used Before')];
         }
         $request['phone'] = $phone['phone'];

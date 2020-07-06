@@ -8,6 +8,8 @@ class {{model_name}} extends Model {
 
     use \Dimsav\Translatable\Translatable;
 
+    const Reports = true;
+
     protected $translationForeignKey = "{{model_name_small}}_id";
 
     public $translatedAttributes = [];

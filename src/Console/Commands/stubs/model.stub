@@ -8,5 +8,7 @@ class {{model_name}} extends Model {
     
     protected $table = "{{model_name_small}}";
 
+    const Reports = true;
+
     protected $fillable = [];
 }

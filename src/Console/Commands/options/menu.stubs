@@ -3,6 +3,7 @@
 return [
     'title' => '{{name}}',
     'icon' => 'icon-users',
+    'order' => 0,
     // sub items
     'items' => [
         [

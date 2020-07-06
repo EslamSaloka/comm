@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Components\Common\Controller\Front;
+namespace Tasawk\TasawkComponent\Common\Controller\Dashboard;
 
 use Illuminate\Http\Request;
-use App\Components\Controller;
+use Tasawk\TasawkComponent\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Components\User\Requests\Front\LoginRequest;
 use App\Components\User\Requests\Front\CheckCodeRequest;
